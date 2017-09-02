@@ -1,0 +1,28 @@
+{
+  "name": "threex.minecraft",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack ./test/index.js ./test/bundle.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jeromeetienne/threex.minecraft.git"
+  },
+  "keywords": [
+    "minecraft",
+    "skin"
+  ],
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/jeromeetienne/threex.minecraft/issues"
+  },
+  "homepage": "https://github.com/jeromeetienne/threex.minecraft#readme",
+  "dependencies": {
+    "three": "^0.86.0"
+  },
+  "devDependencies": {
+    "webpack": "^3.5.5"
+  }
+}
