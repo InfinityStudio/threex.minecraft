@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 1);
+/******/ 	return __webpack_require__(__webpack_require__.s = 2);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -44174,49 +44174,295 @@ function CanvasRenderer() {
 
 /***/ }),
 /* 1 */
+/***/ (function(module, exports) {
+
+exports.steve = create(false)
+exports.alex = create(true)
+
+function create(slim) {
+    return decoratePos(decorateDimension(group(slim)))
+}
+
+function calculate(model) {
+    const pixRatio = 1 / 32;
+    return {
+        h: Math.abs(model.front[1] - model.front[3]) * pixRatio,
+        w: Math.abs(model.front[0] - model.front[2]) * pixRatio,
+        d: Math.abs(model.right[0] - model.right[2]) * pixRatio,
+    }
+}
+function group(slim) {
+    return {
+        head: {
+            layer: {
+                w: 9,
+                h: 9,
+                d: 9,
+                top: [40, 0, 48, 8],
+                bottom: [48, 0, 56, 8],
+                right: [32, 8, 40, 16],
+                front: [40, 8, 48, 16],
+                left: [48, 8, 56, 16],
+                back: [56, 8, 64, 16]
+            },
+            top: [8, 0, 16, 8],
+            bottom: [16, 0, 24, 8],
+            right: [0, 8, 8, 16],
+            front: [8, 8, 16, 16],
+            left: [16, 8, 24, 16],
+            back: [24, 8, 32, 16]
+        },
+        rightLeg: {
+            layer: {
+                w: 4.5,
+                d: 4.5,
+                h: 13.5,
+                top: [4, 48, 8, 36],
+                bottom: [8, 48, 12, 36],
+                right: [0, 36, 4, 48],
+                front: [4, 36, 8, 48],
+                left: [8, 36, 12, 48],
+                back: [12, 36, 16, 48]
+            },
+            top: [4, 16, 8, 20],
+            bottom: [8, 16, 12, 20],
+            right: [0, 20, 4, 32],
+            front: [4, 20, 8, 32],
+            left: [8, 20, 12, 32],
+            back: [12, 20, 16, 32]
+        },
+        torso: {
+            layer: {
+                w: 9,
+                h: 13.5,
+                d: 4.5,
+                top: [20, 48, 28, 36],
+                bottom: [28, 48, 36, 36],
+                right: [16, 36, 20, 48],
+                front: [20, 36, 28, 48],
+                left: [28, 36, 32, 48],
+                back: [32, 36, 40, 48]
+            },
+            top: [20, 16, 28, 20],
+            bottom: [28, 16, 36, 20],
+            right: [16, 20, 20, 32],
+            front: [20, 20, 28, 32],
+            left: [28, 20, 32, 32],
+            back: [32, 20, 40, 32]
+        },
+        leftArm: {
+            layer: {
+                w: 4.5,
+                h: 13.5,
+                d: 4.5,
+                top: [52, 48, 56, 52],
+                bottom: [56, 48, 60, 52],
+                right: [48, 52, 52, 64],
+                front: [52, 52, 56, 64],
+                left: [56, 52, 60, 64],
+                back: [60, 52, 64, 64]
+            },
+
+            top: [36, 48, slim ? 39 : 40, 52],
+            bottom: [slim ? 39 : 40, 48, slim ? 42 : 44, 52],
+            left: [32, 52, 36, 64],
+            front: [36, 52, slim ? 39 : 40, 64],
+            right: [slim ? 39 : 40, 52, slim ? 43 : 44, 64],
+            back: [slim ? 43 : 44, 52, slim ? 46 : 48, 64]
+        },
+        rightArm: {
+            layer: {
+                w: 4.5,
+                h: 13.5,
+                d: 4.5,
+                top: [44, 48, 48, 36],
+                bottom: [48, 48, 52, 36],
+                left: [48, 36, 52, 48],
+                front: [44, 36, 48, 48],
+                right: [40, 36, 44, 48],
+                back: [52, 36, 64, 48]
+            },
+            top: [44, 16, slim ? 47 : 48, 20],
+            bottom: [slim ? 47 : 48, 16, slim ? 50 : 52, 20],
+            left: [40, 20, 44, 32],
+            front: [44, 20, slim ? 47 : 48, 32],
+            right: [slim ? 47 : 48, 20, slim ? 51 : 52, 32],
+            back: [slim ? 51 : 52, 20, slim ? 54 : 56, 32]
+        },
+        leftLeg: {
+            layer: {
+                w: 4.5,
+                d: 4.5,
+                h: 13.5,
+                top: [4, 48, 8, 52],
+                bottom: [8, 48, 12, 52],
+                right: [0, 52, 4, 64],
+                front: [4, 52, 8, 64],
+                left: [8, 52, 12, 64],
+                back: [12, 52, 16, 64]
+            },
+            top: [20, 48, 24, 52],
+            bottom: [24, 48, 28, 52],
+            right: [16, 52, 20, 64],
+            front: [20, 52, 24, 64],
+            left: [24, 52, 28, 64],
+            back: [28, 52, 32, 64]
+        },
+
+        cape: {
+            top: [1, 0, 11, 1],
+            bottom: [11, 0, 21, 1],
+            left: [11, 1, 12, 17],
+            front: [12, 1, 22, 17],
+            right: [0, 1, 1, 17],
+            back: [1, 1, 11, 17]
+        },
+    }
+}
+function decorateDimension(group) {
+    const pixRatio = 1 / 32;
+    Object.keys(group).map(k => group[k]).forEach(part => {
+        Object.assign(part, calculate(part));
+        if (part.layer) {
+            part.layer.w *= pixRatio;
+            part.layer.h *= pixRatio;
+            part.layer.d *= pixRatio;
+        }
+    })
+    return group;
+}
+
+function decoratePos(group) {
+    const charH = 1;
+    group.head.y = charH - group.head.h / 2;
+
+    group.torso.y = group.rightLeg.h + group.torso.h / 2;
+
+    group.rightLeg.x = -group.rightLeg.w / 2;
+    group.rightLeg.y = group.rightLeg.h / 2;
+    group.leftLeg.x = group.leftLeg.w / 2;
+    group.leftLeg.y = group.leftLeg.h / 2;
+
+    group.rightArm.x = -group.torso.w / 2 - group.rightArm.w / 2;
+    group.rightArm.y = group.rightLeg.h + group.torso.h - group.rightArm.h / 2;
+
+    group.leftArm.x = group.torso.w / 2 + group.leftArm.w / 2
+    group.leftArm.y = group.leftLeg.h + group.torso.h - group.leftArm.h / 2;
+
+    group.cape.y = group.rightLeg.h + group.torso.h / 5 * 2;
+    group.cape.z = -group.torso.d * 3 / 2;
+    return group;
+}
+
+/***/ }),
+/* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
 const THREE = __webpack_require__(0)
-const THREEx = __webpack_require__(2)
+const PlayerModel = __webpack_require__(3)
 var renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('canvas'), antialias: true, alpha: true });
 // renderer.setClearColor('#FFF', 0)
 // gl.clear(gl.COLOR_BUFFER_BIT);
 var onRenderFcts = [];
 var scene = new THREE.Scene();
-var camera = new THREE.PerspectiveCamera(45, 1, 0.5, 5);
+var camera = new THREE.PerspectiveCamera(45, 600 / 800, 0.5, 5);
 camera.position.z = 3;
-//////////////////////////////////////////////////////////////////////////////////
-//		load Character							//
-//////////////////////////////////////////////////////////////////////////////////
+renderer.setClearColor(0xdddddd);
+const miku = 'data:image/png;base64, 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'
+const cape = 'data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAEAAAAAgCAYAAACinX6EAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAAOwwAADsMBx2+oZAAAAAd0SU1FB98KBgsrL5GTbPYAAAO0SURBVGje7ZhRb9tUFMd/x4ldJ3W2rmNDpXSh1GopmjYRaS/wtkfEA4I3vkE/AS/srS98EcQLEkj7ApMmXhAIpkmlI10o1ZZtsHZrEje1E18eEjt2GmjT2iETOVFkX9/r63v+53/+99iilFJfzy3xV7NBw3N5jCJqbyBM6wavmdP89uJPTmK3DvYRETnJ2G/ml2MPfNb2eKRrYXt9Z+tE8wAopRRDWvZLa5aPL72JUZjldvUhNkKtC0IBIW9McfPiPK53yHZmj99b7rGTrpnWsOvg00cPhP/AsgCbtT1WChf4aO5tblcfho477mHo/GZtL7ypisLTBKGzZtUFLGgv+Gpox/uZ0M+IYZgwNABFfYqfn1d5rhSfFN+NDfhue4OLIrwzfZ6NZgOAlqYRrkZAlKC6v7PaakaPtYvuITfaPh+ef129//KppAKAaeax2y2uuE3u/vErADnDRM9k+cCaodVuDcq4MOY+Kox+r2/4FAhYoOtGeD2PhXNQxzBMvk8BhGxwYk2fo+772IBVmAGg2XTCPgBqu5Fbu/RXoInQkx+VyMLs8k8AbBSvpqoB2j91NJsOppnnerV8vPrGWpKI82W7RNkusbp9n3zOGg0AVmEGqzBDvfYixoDjXJdI+yw68KztHbkWZUCQBomnQBDtlcq9WOcvczabi9dYqdxjc/Ha0btFwvCLgK8CVTjbGst2KUyBsl3C89zUGJAFaLVbR5wHYvSPs6EngFHGJ+F8FISo5XMdMUwFgH6LRnsQMNDZ9hzdIOe6aLGi7/QgBBWg57noujESFmj/5rzj1AZSXwQcQ0ekV/z0F6FfLCwNjcL6zpbccZ0jQhgAkYYODNwFHKfWoV2+EGrB4Nq7A0ZDzyIpFrJBOqSxG2gAB8qPOR84HgWjHhkTZULnqIWMaOiZMy0oSIMg8tHop5YCeqT8fO9pBYDZC5dDFvTXAg29Ix2+Ut1zRfgiliAVghTorw4TF0FPKSrLN1h88ENM+C5FtsN45LuZ39kMQucdQ0f5fiILC4Qw7aowC5CbypEx8zy+fpO2UtSdfaz8ud7LTr5AruVCvVMgLTfT25fXd7aEhSX1mZgxMQRY3b7Pj5ffShaAz+u7xw5a6B5LQ0x864qdODhpMEBjDG3e88M0SFsMxxKAtScV+Uo1Y5HfKF4dXSU4Niww4OX+bqrP0cYVgLUnFbnjOnxrZnHdZuyfpMlpvqSeaGKRkX/kPI0vY8uAUdkEgP87AKlpwIQBEwAmAEwAmADwCtjfoQqR5ngm/9sAAAAASUVORK5CYII='
+const steve = 'data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAEAAAAAgCAMAAACVQ462AAAABGdBTUEAALGPC/xhBQAAAwBQTFRFAAAAHxALIxcJJBgIJBgKJhgLJhoKJxsLJhoMKBsKKBsLKBoNKBwLKRwMKh0NKx4NKx4OLR0OLB4OLx8PLB4RLyANLSAQLyIRMiMQMyQRNCUSOigUPyoVKCgoPz8/JiFbMChyAFtbAGBgAGhoAH9/Qh0KQSEMRSIOQioSUigmUTElYkMvbUMqb0UsakAwdUcvdEgvek4za2trOjGJUj2JRjqlVknMAJmZAJ6eAKioAK+vAMzMikw9gFM0hFIxhlM0gVM5g1U7h1U7h1g6ilk7iFo5j14+kF5Dll9All9BmmNEnGNFnGNGmmRKnGdIn2hJnGlMnWpPlm9bnHJcompHrHZaqn1ms3titXtnrYBttIRttolsvohst4Jyu4lyvYtyvY5yvY50xpaA////AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPSUN6AAAAQB0Uk5T////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////AFP3ByUAAAAYdEVYdFNvZnR3YXJlAFBhaW50Lk5FVCB2My4zNqnn4iUAAAKjSURBVEhLpZSLVtNAEIYLpSlLSUITLCBaGhNBQRM01M2mSCoXNUURIkZFxQvv/wz6724Wij2HCM7J6UyS/b+dmZ208rsww6jiqo4FhannZb5yDqjaNgDVwE/8JAmCMqF6fwGwbU0CKjD/+oAq9jcM27gxAFpNQxU3Bwi9Ajy8fgmGZuvaGAcIuwFA12CGce1jJESr6/Ot1i3Tnq5qptFqzet1jRA1F2XHWQFAs3RzwTTNhQd3rOkFU7c0DijmohRg1TR9ZmpCN7/8+PX954fb+sTUjK7VLKOYi1IAaTQtUrfm8pP88/vTw8M5q06sZoOouSgHEDI5vrO/eHK28el04yxf3N8ZnyQooZiLfwA0arNb6d6bj998/+vx8710a7bW4E2Uc1EKsEhz7WiQBK9eL29urrzsB8ngaK1JLDUXpYAkGSQH6e7640fL91dWXjxZ33138PZggA+Sz0WQlAL4gmewuzC1uCenqXevMPWc9XrMX/VXh6Hicx4ByHEeAfRg/wtgSMAvz+CKEkYAnc5SpwuD4z70PM+hUf+4348ixF7EGItjxmQcCx/Dzv/SOkuXAF3PdT3GIujjGLELNYwxhF7M4oi//wsgdlYZdMXCmEUUSsSu0OOBACMoBTiu62BdRPEjYxozXFyIpK7IAE0IYa7jOBRqGlOK0BFq3Kdpup3DthFwP9QDlBCGKEECoHEBEDLAXHAQMQnI8jwFYRQw3AMOQAJoOADoAVcDAh0HZAKQZUMZdC43kdeqAPwUBEsC+M4cIEq5KEEBCl90mR8CVR3nxwCdBBS9OAe020UGnXb7KcxzPY9SXoEEIBZtgE7UDgBKyLMhgBS2YdzjMJb4XHRDAPiQhSGjNOxKQIZTgC8BiMECgarxprjjO0OXiV4MAf4A/x0nbcyiS5EAAAAASUVORK5CYII='
+const nsteve = 'data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAFDUlEQVR42u2a20sUURzH97G0LKMotPuWbVpslj1olJXdjCgyisowsSjzgrB0gSKyC5UF1ZNQWEEQSBQ9dHsIe+zJ/+nXfM/sb/rN4ZwZ96LOrnPgyxzP/M7Z+X7OZc96JpEISfWrFhK0YcU8knlozeJKunE4HahEqSc2nF6zSEkCgGCyb+82enyqybtCZQWAzdfVVFgBJJNJn1BWFgC49/VpwGVlD0CaxQiA5HSYEwBM5sMAdKTqygcAG9+8coHKY/XXAZhUNgDYuBSPjJL/GkzVVhAEU5tqK5XZ7cnFtHWtq/TahdSw2l0HUisr1UKIWJQBAMehDuqiDdzndsP2EZECAG1ZXaWMwOCODdXqysLf++uXUGv9MhUHIByDOijjdiSAoH3ErANQD73C7TXXuGOsFj1d4YH4OTJAEy8y9Hd0mCaeZ5z8dfp88zw1bVyiYhCLOg1ZeAqC0ybaDttHRGME1DhDeVWV26u17lRAPr2+mj7dvULfHw2q65fhQRrLXKDfIxkau3ZMCTGIRR3URR5toU38HbaPiMwUcKfBAkoun09PzrbQ2KWD1JJaqswjdeweoR93rirzyCMBCmIQizqoizZkm2H7iOgAcHrMHbbV9KijkUYv7qOn55sdc4fo250e+vUg4329/Xk6QB/6DtOws+dHDGJRB3XRBve+XARt+4hIrAF4UAzbnrY0ve07QW8uHfB+0LzqanMM7qVb+3f69LJrD90/1axiEIs6qIs21BTIToewfcSsA+Bfb2x67OoR1aPPzu2i60fSNHRwCw221Suz0O3jO+jh6V1KyCMGse9721XdN5ePutdsewxS30cwuMjtC860T5JUKpXyKbSByUn7psi5l+juDlZYGh9324GcPKbkycaN3jUSAGxb46IAYPNZzW0AzgiQ5tVnzLUpUDCAbakMQXXrOtX1UMtHn+Q9/X5L4wgl7t37r85OSrx+TYl379SCia9KXjxRpiTjIZTBFOvrV1f8ty2eY/T7XJ81FQAwmA8ASH1ob68r5PnBsxA88/xAMh6SpqW4HRnLBrkOA9Xv5wPAZjAUgOkB+SHxgBgR0qSMh0zmZRsmwDJm1gFg2PMDIC8/nAHIMls8x8GgzOsG5WiaqREgYzDvpTwjLDy8NM15LpexDEA3LepjU8Z64my+8PtDCmUyRr+fFwA2J0eAFYA0AxgSgMmYBMZTwFQnO9RNAEaHOj2DXF5UADmvAToA2ftyxZYA5BqgmZZApDkdAK4mAKo8GzPlr8G8AehzMAyA/i1girUA0HtYB2CaIkUBEHQ/cBHSvwF0AKZFS5M0ZwMQtEaEAmhtbSUoDADH9ff3++QZ4o0I957e+zYAMt6wHkhzpjkuAcgpwNcpA7AZDLsvpwiuOkBvxygA6Bsvb0HlaeKIF2EbADZpGiGzBsA0gnwQHGOhW2snRpbpPexbAB2Z1oicAMQpTnGKU5ziFKc4xSlOcYpTnOIUpzgVmgo+XC324WfJAdDO/+ceADkCpuMFiFKbApEHkOv7BfzfXt+5gpT8V7rpfYJcDz+jAsB233r6yyBsJ0mlBCDofuBJkel4vOwBFPv8fyYAFPJ+wbSf/88UANNRVy4Awo6+Ig2gkCmgA5DHWjoA+X7AlM//owLANkX0w0359od++pvX8fdMAcj3/QJ9iJsAFPQCxHSnQt8vMJ3v2wCYpkhkAOR7vG7q4aCXoMoSgG8hFAuc/grMdAD4B/kHl9da7Ne9AAAAAElFTkSuQmCC'
 
+const raytrace = new THREE.Raycaster(undefined, undefined, 1, 10)
 
-var character = new THREEx.PlayerModel()
+const skins = [miku, steve, nsteve]
+document.getElementById('img').src = miku;
+var character = new PlayerModel({ skin: miku, cape, isSlim: true })
+character.name('miku')
+character.say('Hello world');
 character.root.translateY(-0.5)
 scene.add(character.root)
-let vec = character.root.position
 camera.lookAt(new THREE.Vector3(0, 0, 0))
 
+let idx = 0;
+document.body.onclick = function (e) {
+    idx = (idx + 1) % skins.length;
+    let sk = skins[idx]
+    document.getElementById('img').src = sk;
+    character.updateSkin(sk, idx == 0)
+}
+character.root.rotation.x = -1
+let mouse = new THREE.Vector2();
+window.addEventListener('mousemove', function (event) {
+    mouse.x = (event.clientX / 600) * 2 - 1;
+    mouse.y = - (event.clientY / 800) * 2 + 1;
+}, false);
+
+let intersected;
 
 requestAnimationFrame(function animate(nowMsec) {
     // keep looping
     requestAnimationFrame(animate);
     // measure time
     // controls.update()
+    raytrace.setFromCamera(mouse, camera)
+    let intersects = raytrace.intersectObjects(character.root.children, true);
+    if (intersects.length > 0) {
+        let current;
+        for (let i = 0; i < intersects.length; i++) {
+            current = intersects[i];
+            if (!current instanceof THREE.BoxHelper &&
+                !current.object.name.endsWith('Layer') &&
+                !current.object.name.endsWith('Box')) break;
+        }
+        if (current && !(current.object instanceof THREE.Sprite)) {
+            if (intersected === undefined ||
+                (current.uuid !== intersected.uuid)) {
+                if (intersected) {
+                    const name = intersected.name
+                    if (character[`${name}Box`]) {
+                        character[`${name}Box`].visible = false;
+                    }
+                }
+                intersected = current
+                console.log(intersected.object.name)
+                const name = intersected.name
+                if (character[`${name}Box`]) {
+                    console.log('box')
+                    character[`${name}Box`].visible = true;
+                }
+            }
+        }
+    } else {
+        if (intersected) {
+            const name = intersected.name
+            if (character[`${name}Box`]) {
+                character[`${name}Box`].visible = true;
+            }
+        }
+        intersected = undefined;
+    }
     renderer.render(scene, camera);
+
     character.root.rotation.y += 0.01;
 })
 
 
 
 /***/ }),
-/* 2 */
+/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(Buffer) {
 const THREE = __webpack_require__(0)
-const buildNameTag = __webpack_require__(8)
-const buildChatBox = __webpack_require__(9)
+const buildNameTag = __webpack_require__(9)
+const buildChatBox = __webpack_require__(10)
+const convert = __webpack_require__(11)
+
+const remodel = __webpack_require__(12)
+const remap = __webpack_require__(13)
+
 const FACE = {
 	left: 0,
 	right: 1,
@@ -44226,8 +44472,7 @@ const FACE = {
 	back: 5
 }
 
-// const defaultSkin = 'iVBORw0KGgoAAAANSUhEUgAAAEAAAAAgCAMAAACVQ462AAAABGdBTUEAALGPC/xhBQAAAwBQTFRFAAAAHxALIxcJJBgIJBgKJhgLJhoKJxsLJhoMKBsKKBsLKBoNKBwLKRwMKh0NKx4NKx4OLR0OLB4OLx8PLB4RLyANLSAQLyIRMiMQMyQRNCUSOigUPyoVKCgoPz8/JiFbMChyAFtbAGBgAGhoAH9/Qh0KQSEMRSIOQioSUigmUTElYkMvbUMqb0UsakAwdUcvdEgvek4za2trOjGJUj2JRjqlVknMAJmZAJ6eAKioAK+vAMzMikw9gFM0hFIxhlM0gVM5g1U7h1U7h1g6ilk7iFo5j14+kF5Dll9All9BmmNEnGNFnGNGmmRKnGdIn2hJnGlMnWpPlm9bnHJcompHrHZaqn1ms3titXtnrYBttIRttolsvohst4Jyu4lyvYtyvY5yvY50xpaA////AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPSUN6AAAAQB0Uk5T////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////AFP3ByUAAAAYdEVYdFNvZnR3YXJlAFBhaW50Lk5FVCB2My4zNqnn4iUAAAKjSURBVEhLpZSLVtNAEIYLpSlLSUITLCBaGhNBQRM01M2mSCoXNUURIkZFxQvv/wz6724Wij2HCM7J6UyS/b+dmZ208rsww6jiqo4FhannZb5yDqjaNgDVwE/8JAmCMqF6fwGwbU0CKjD/+oAq9jcM27gxAFpNQxU3Bwi9Ajy8fgmGZuvaGAcIuwFA12CGce1jJESr6/Ot1i3Tnq5qptFqzet1jRA1F2XHWQFAs3RzwTTNhQd3rOkFU7c0DijmohRg1TR9ZmpCN7/8+PX954fb+sTUjK7VLKOYi1IAaTQtUrfm8pP88/vTw8M5q06sZoOouSgHEDI5vrO/eHK28el04yxf3N8ZnyQooZiLfwA0arNb6d6bj998/+vx8710a7bW4E2Uc1EKsEhz7WiQBK9eL29urrzsB8ngaK1JLDUXpYAkGSQH6e7640fL91dWXjxZ33138PZggA+Sz0WQlAL4gmewuzC1uCenqXevMPWc9XrMX/VXh6Hicx4ByHEeAfRg/wtgSMAvz+CKEkYAnc5SpwuD4z70PM+hUf+4348ixF7EGItjxmQcCx/Dzv/SOkuXAF3PdT3GIujjGLELNYwxhF7M4oi//wsgdlYZdMXCmEUUSsSu0OOBACMoBTiu62BdRPEjYxozXFyIpK7IAE0IYa7jOBRqGlOK0BFq3Kdpup3DthFwP9QDlBCGKEECoHEBEDLAXHAQMQnI8jwFYRQw3AMOQAJoOADoAVcDAh0HZAKQZUMZdC43kdeqAPwUBEsC+M4cIEq5KEEBCl90mR8CVR3nxwCdBBS9OAe020UGnXb7KcxzPY9SXoEEIBZtgE7UDgBKyLMhgBS2YdzjMJb4XHRDAPiQhSGjNOxKQIZTgC8BiMECgarxprjjO0OXiV4MAf4A/x0nbcyiS5EAAAAASUVORK5CYII='
-const defaultSkin = 'iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAFDUlEQVR42u2a20sUURzH97G0LKMotPuWbVpslj1olJXdjCgyisowsSjzgrB0gSKyC5UF1ZNQWEEQSBQ9dHsIe+zJ/+nXfM/sb/rN4ZwZ96LOrnPgyxzP/M7Z+X7OZc96JpEISfWrFhK0YcU8knlozeJKunE4HahEqSc2nF6zSEkCgGCyb+82enyqybtCZQWAzdfVVFgBJJNJn1BWFgC49/VpwGVlD0CaxQiA5HSYEwBM5sMAdKTqygcAG9+8coHKY/XXAZhUNgDYuBSPjJL/GkzVVhAEU5tqK5XZ7cnFtHWtq/TahdSw2l0HUisr1UKIWJQBAMehDuqiDdzndsP2EZECAG1ZXaWMwOCODdXqysLf++uXUGv9MhUHIByDOijjdiSAoH3ErANQD73C7TXXuGOsFj1d4YH4OTJAEy8y9Hd0mCaeZ5z8dfp88zw1bVyiYhCLOg1ZeAqC0ybaDttHRGME1DhDeVWV26u17lRAPr2+mj7dvULfHw2q65fhQRrLXKDfIxkau3ZMCTGIRR3URR5toU38HbaPiMwUcKfBAkoun09PzrbQ2KWD1JJaqswjdeweoR93rirzyCMBCmIQizqoizZkm2H7iOgAcHrMHbbV9KijkUYv7qOn55sdc4fo250e+vUg4329/Xk6QB/6DtOws+dHDGJRB3XRBve+XARt+4hIrAF4UAzbnrY0ve07QW8uHfB+0LzqanMM7qVb+3f69LJrD90/1axiEIs6qIs21BTIToewfcSsA+Bfb2x67OoR1aPPzu2i60fSNHRwCw221Suz0O3jO+jh6V1KyCMGse9721XdN5ePutdsewxS30cwuMjtC860T5JUKpXyKbSByUn7psi5l+juDlZYGh9324GcPKbkycaN3jUSAGxb46IAYPNZzW0AzgiQ5tVnzLUpUDCAbakMQXXrOtX1UMtHn+Q9/X5L4wgl7t37r85OSrx+TYl379SCia9KXjxRpiTjIZTBFOvrV1f8ty2eY/T7XJ81FQAwmA8ASH1ob68r5PnBsxA88/xAMh6SpqW4HRnLBrkOA9Xv5wPAZjAUgOkB+SHxgBgR0qSMh0zmZRsmwDJm1gFg2PMDIC8/nAHIMls8x8GgzOsG5WiaqREgYzDvpTwjLDy8NM15LpexDEA3LepjU8Z64my+8PtDCmUyRr+fFwA2J0eAFYA0AxgSgMmYBMZTwFQnO9RNAEaHOj2DXF5UADmvAToA2ftyxZYA5BqgmZZApDkdAK4mAKo8GzPlr8G8AehzMAyA/i1girUA0HtYB2CaIkUBEHQ/cBHSvwF0AKZFS5M0ZwMQtEaEAmhtbSUoDADH9ff3++QZ4o0I957e+zYAMt6wHkhzpjkuAcgpwNcpA7AZDLsvpwiuOkBvxygA6Bsvb0HlaeKIF2EbADZpGiGzBsA0gnwQHGOhW2snRpbpPexbAB2Z1oicAMQpTnGKU5ziFKc4xSlOcYpTnOIUpzgVmgo+XC324WfJAdDO/+ceADkCpuMFiFKbApEHkOv7BfzfXt+5gpT8V7rpfYJcDz+jAsB233r6yyBsJ0mlBCDofuBJkel4vOwBFPv8fyYAFPJ+wbSf/88UANNRVy4Awo6+Ig2gkCmgA5DHWjoA+X7AlM//owLANkX0w0359od++pvX8fdMAcj3/QJ9iJsAFPQCxHSnQt8vMJ3v2wCYpkhkAOR7vG7q4aCXoMoSgG8hFAuc/grMdAD4B/kHl9da7Ne9AAAAAElFTkSuQmCC'
+const defaultSkin = 'data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAFDUlEQVR42u2a20sUURzH97G0LKMotPuWbVpslj1olJXdjCgyisowsSjzgrB0gSKyC5UF1ZNQWEEQSBQ9dHsIe+zJ/+nXfM/sb/rN4ZwZ96LOrnPgyxzP/M7Z+X7OZc96JpEISfWrFhK0YcU8knlozeJKunE4HahEqSc2nF6zSEkCgGCyb+82enyqybtCZQWAzdfVVFgBJJNJn1BWFgC49/VpwGVlD0CaxQiA5HSYEwBM5sMAdKTqygcAG9+8coHKY/XXAZhUNgDYuBSPjJL/GkzVVhAEU5tqK5XZ7cnFtHWtq/TahdSw2l0HUisr1UKIWJQBAMehDuqiDdzndsP2EZECAG1ZXaWMwOCODdXqysLf++uXUGv9MhUHIByDOijjdiSAoH3ErANQD73C7TXXuGOsFj1d4YH4OTJAEy8y9Hd0mCaeZ5z8dfp88zw1bVyiYhCLOg1ZeAqC0ybaDttHRGME1DhDeVWV26u17lRAPr2+mj7dvULfHw2q65fhQRrLXKDfIxkau3ZMCTGIRR3URR5toU38HbaPiMwUcKfBAkoun09PzrbQ2KWD1JJaqswjdeweoR93rirzyCMBCmIQizqoizZkm2H7iOgAcHrMHbbV9KijkUYv7qOn55sdc4fo250e+vUg4329/Xk6QB/6DtOws+dHDGJRB3XRBve+XARt+4hIrAF4UAzbnrY0ve07QW8uHfB+0LzqanMM7qVb+3f69LJrD90/1axiEIs6qIs21BTIToewfcSsA+Bfb2x67OoR1aPPzu2i60fSNHRwCw221Suz0O3jO+jh6V1KyCMGse9721XdN5ePutdsewxS30cwuMjtC860T5JUKpXyKbSByUn7psi5l+juDlZYGh9324GcPKbkycaN3jUSAGxb46IAYPNZzW0AzgiQ5tVnzLUpUDCAbakMQXXrOtX1UMtHn+Q9/X5L4wgl7t37r85OSrx+TYl379SCia9KXjxRpiTjIZTBFOvrV1f8ty2eY/T7XJ81FQAwmA8ASH1ob68r5PnBsxA88/xAMh6SpqW4HRnLBrkOA9Xv5wPAZjAUgOkB+SHxgBgR0qSMh0zmZRsmwDJm1gFg2PMDIC8/nAHIMls8x8GgzOsG5WiaqREgYzDvpTwjLDy8NM15LpexDEA3LepjU8Z64my+8PtDCmUyRr+fFwA2J0eAFYA0AxgSgMmYBMZTwFQnO9RNAEaHOj2DXF5UADmvAToA2ftyxZYA5BqgmZZApDkdAK4mAKo8GzPlr8G8AehzMAyA/i1girUA0HtYB2CaIkUBEHQ/cBHSvwF0AKZFS5M0ZwMQtEaEAmhtbSUoDADH9ff3++QZ4o0I957e+zYAMt6wHkhzpjkuAcgpwNcpA7AZDLsvpwiuOkBvxygA6Bsvb0HlaeKIF2EbADZpGiGzBsA0gnwQHGOhW2snRpbpPexbAB2Z1oicAMQpTnGKU5ziFKc4xSlOcYpTnOIUpzgVmgo+XC324WfJAdDO/+ceADkCpuMFiFKbApEHkOv7BfzfXt+5gpT8V7rpfYJcDz+jAsB233r6yyBsJ0mlBCDofuBJkel4vOwBFPv8fyYAFPJ+wbSf/88UANNRVy4Awo6+Ig2gkCmgA5DHWjoA+X7AlM//owLANkX0w0359od++pvX8fdMAcj3/QJ9iJsAFPQCxHSnQt8vMJ3v2wCYpkhkAOR7vG7q4aCXoMoSgG8hFAuc/grMdAD4B/kHl9da7Ne9AAAAAElFTkSuQmCC'
 
 function isAllAplha(context, x1, y1, x2, y2) {
 	const h = Math.abs(y1 - y2);
@@ -44240,41 +44485,20 @@ function isAllAplha(context, x1, y1, x2, y2) {
 		}
 	return true;
 }
-function head() {
-	toSkinVertices(8, 0, 16, 8),
-		toSkinVertices(16, 0, 24, 8),
-		toSkinVertices(0, 8, 8, 16),
-		toSkinVertices(8, 8, 16, 16),
-		toSkinVertices(16, 8, 24, 16),
-		toSkinVertices(24, 8, 32, 16)
-}
 
-const remodel = __webpack_require__(10)
-const remap = __webpack_require__(11)
 class CharacterModel {
-	mapUv(geometry, faceIdx, x1, y1, x2, y2) {
-		const tileUvW = 1 / this.texture.image.width
-		const tileUvH = 1 / this.texture.image.height
-		let UVs = geometry.faceVertexUvs[0][faceIdx * 2];
-		UVs[0].x = x1 * tileUvW; UVs[0].y = y1 * tileUvH;
-		UVs[1].x = x1 * tileUvW; UVs[1].y = y2 * tileUvH;
-		UVs[2].x = x2 * tileUvW; UVs[2].y = y1 * tileUvH;
-		UVs = geometry.faceVertexUvs[0][faceIdx * 2 + 1];
-		UVs[0].x = x1 * tileUvW; UVs[0].y = y2 * tileUvH;
-		UVs[1].x = x2 * tileUvW; UVs[1].y = y2 * tileUvH;
-		UVs[2].x = x2 * tileUvW; UVs[2].y = y1 * tileUvH;
-	}
 	constructor(option = {}) {
-		const { skin, cape, isSlim } = option;
+		let { skin, cape, isSlim } = option;
+
 		this.remap = remap;
 		this.remodel = remodel;
-		//////////////////////////////////////////////////////////////////////////////////
-		//		skin texture								//
-		//////////////////////////////////////////////////////////////////////////////////	
-		const texture = new THREE.Texture();
+
+		const texture = new THREE.Texture(document.createElement('canvas'));
+		console.log(texture.image)
 		texture.magFilter = THREE.NearestFilter;
 		texture.minFilter = THREE.NearestFilter;
 		this.texture = texture;
+		texture.name = 'skinTexture'
 		this.material = new THREE.MeshBasicMaterial({ map: texture });
 		this.materialTran = new THREE.MeshBasicMaterial({
 			map: texture,
@@ -44282,58 +44506,74 @@ class CharacterModel {
 			depthWrite: false,
 			side: THREE.DoubleSide
 		})
+		const capeTexture = new THREE.Texture(document.createElement('canvas'));
+		capeTexture.magFilter = THREE.NearestFilter;
+		capeTexture.minFilter = THREE.NearestFilter;
+		this.capeTexture = capeTexture
+		capeTexture.name = 'capeTexture'
+		const capeMaterial = new THREE.MeshBasicMaterial({
+			map: this.capeTexture
+		})
+		capeMaterial.name = 'capeMaterial'
+		this.capeMaterial = capeMaterial;
 
-		if (!skin) this.updateSkin(defaultSkin)
-		else this.updateSkin(skin)
-
+		if (!skin) skin = defaultSkin;
+		this.updateSkin(skin, isSlim)
 		if (cape) this.updateCape(cape);
-		this.remodel(cape, isSlim || false)
 	}
 
-	updateSkin(skin) {
+	updateSkin(skin, isSlim) {
+		isSlim = isSlim || false
 		const texture = this.texture
-		const img = new Image();
-		const reload = () => {
-			texture.image = img;
+		const slimChange = this.slim !== isSlim;
+		this.slim = isSlim;
+		if (slimChange) this.remodel()
+		const reload = (img) => {
+			let legacy = img.width !== img.height;
+			const canvas = texture.image;
+			const context = canvas.getContext('2d');
+			canvas.width = img.width;
+			canvas.height = img.width;
+			context.clearRect(0, 0, img.width, img.width);
+			if (legacy) {
+				context.drawImage(img, 0, 0, img.width, img.width / 2.0);
+				convert(context, img.width);
+			} else {
+				context.drawImage(img, 0, 0, img.width, img.width);
+			}
+			if (slimChange) this.remap()
 			texture.needsUpdate = true;
-			if (texture.image.heigth !== img.height)
-				this.remap()
 		}
-		img.onload = reload
+		if (skin instanceof Image) {
+			reload(skin);
+			return;
+		}
+		const img = new Image();
+		img.onload = () => { reload(img) }
 		if (skin instanceof Buffer) {
 			img.src = 'data:image/png;base64, ' + skin.toString('base64');
 		} else if (typeof skin === 'string') {
-			if (!skin.startsWith('data:image/png;base64,'))
-				skin = 'data:image/png;base64, ' + skin
 			img.src = skin;
 		}
 		return this
 	}
 	updateCape(cape) {
-		if (!this.capeTexture) {
-			const capeTexture = new THREE.Texture();
-			capeTexture.magFilter = THREE.NearestFilter;
-			capeTexture.minFilter = THREE.NearestFilter;
-			this.capeTexture = capeTexture
-		}
-		if (!this.capeMaterial) {
-			const capeMaterial = new THREE.MeshBasicMaterial({
-				map: this.capeTexture
-			})
-			this.capeMaterial = capeMaterial;
-		}
 		const texture = this.capeTexture;
-		if (cape instanceof Buffer) {
-			const img = new Image();
-			img.onload = () => {
-				texture.image = img;
-				texture.needsUpdate = true;
-			}
-			img.src = 'data:image/png;base64, ' + skin.toString('base64');
-		} else if (skin instanceof Image) {
-			texture.image = cape
+		const reload = (img) => {
+			texture.image = img
 			texture.needsUpdate = true;
+			this.remap('cape');
 		}
+		if (cape instanceof Image) {
+			reload(cape);
+			return;
+		}
+		const img = new Image();
+		img.onload = () => { reload(img) };
+		if (cape instanceof Buffer)
+			img.src = 'data:image/png;base64, ' + skin.toString('base64');
+		else if (typeof cape === 'string')
+			img.src = cape;
 		return this;
 	}
 	name(name) {
@@ -44350,7 +44590,7 @@ class CharacterModel {
 		// build the sprite itself
 		var material = new THREE.SpriteMaterial({
 			map: texture,
-			useScreenCoordinates: false
+			// useScreenCoordinates: false
 		});
 		var sprite = new THREE.Sprite(material);
 		this.nameTagObject = sprite
@@ -44364,7 +44604,7 @@ class CharacterModel {
 		if (option.skin) { loadSkin(option.skin) }
 		if (option.cape) { loadCape(option.skin) }
 	}
-	say(text, expire = 10) {
+	say(text, expire = 4) {
 		expire = expire * 1000;
 		if (this.speakExpire) {
 			clearTimeout(this.speakExpire)
@@ -44372,11 +44612,11 @@ class CharacterModel {
 			this.speakBox = null
 			this.speakExpire = null
 		}
-		this.speakExpire = setTimeout(expire, () => {
+		this.speakExpire = setTimeout(() => {
 			this.root.remove(this.speakBox)
 			this.speakBox = null
 			this.speakExpire = null
-		})
+		}, expire)
 
 		// build the texture
 		var canvas = buildChatBox(text);
@@ -44385,7 +44625,7 @@ class CharacterModel {
 		// build the sprite itself
 		var material = new THREE.SpriteMaterial({
 			map: texture,
-			useScreenCoordinates: false
+			// useScreenCoordinates: false
 		});
 		var sprite = new THREE.Sprite(material);
 		this.speakBox = sprite
@@ -44397,12 +44637,12 @@ class CharacterModel {
 	}
 }
 
-exports.PlayerModel = CharacterModel 
+module.exports = CharacterModel 
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3).Buffer))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4).Buffer))
 
 /***/ }),
-/* 3 */
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -44416,9 +44656,9 @@ exports.PlayerModel = CharacterModel
 
 
 
-var base64 = __webpack_require__(5)
-var ieee754 = __webpack_require__(6)
-var isArray = __webpack_require__(7)
+var base64 = __webpack_require__(6)
+var ieee754 = __webpack_require__(7)
+var isArray = __webpack_require__(8)
 
 exports.Buffer = Buffer
 exports.SlowBuffer = SlowBuffer
@@ -46196,10 +46436,10 @@ function isnan (val) {
   return val !== val // eslint-disable-line no-self-compare
 }
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
 
 /***/ }),
-/* 4 */
+/* 5 */
 /***/ (function(module, exports) {
 
 var g;
@@ -46226,7 +46466,7 @@ module.exports = g;
 
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -46347,7 +46587,7 @@ function fromByteArray (uint8) {
 
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ (function(module, exports) {
 
 exports.read = function (buffer, offset, isLE, mLen, nBytes) {
@@ -46437,7 +46677,7 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
 
 
 /***/ }),
-/* 7 */
+/* 8 */
 /***/ (function(module, exports) {
 
 var toString = {}.toString;
@@ -46448,56 +46688,26 @@ module.exports = Array.isArray || function (arr) {
 
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, exports) {
 
 
 module.exports = function buildNickCartouche(text) {
 	// create the canvas
-	var canvas = document.createElement("canvas");
-	var context = canvas.getContext("2d");
+	let canvas = document.createElement("canvas");
+	let context = canvas.getContext("2d");
 	canvas.width = 256;
 	canvas.height = 128;
 	// center the origin
 	context.translate(canvas.width / 2, canvas.height / 2);
 	// measure text
-	var fontSize = 36;
+	let fontSize = 20;
 	context.font = "bolder " + fontSize + "px Verdana";
-	var fontH = fontSize;
-	var fontW = context.measureText(text).width;
+	let fontH = fontSize;
+	let fontW = context.measureText(text).width;
 	// build the background
-	context.fillStyle = "rgba(0,0,255,0.3)";
-	var scale = 1.2;
-	context.fillRect(-fontW * scale / 2, -fontH * scale / 1.3, fontW * scale, fontH * scale)
-	// display the text
-	context.fillStyle = "rgba(0,0,0,0.7)";
-	context.fillText(text, -fontW / 2, 0);
-	// return the canvas element
-	return canvas;
-};
-
-
-
-/***/ }),
-/* 9 */
-/***/ (function(module, exports) {
-
-module.exports = function buildChatBubble(text) {
-	// create the canvas
-	var canvas = document.createElement("canvas");
-	var context = canvas.getContext("2d");
-	canvas.width = 1024;
-	canvas.height = 512;
-	// center the origin
-	context.translate(canvas.width / 2, canvas.height / 2);
-	// measure text
-	var fontSize = 24;
-	context.font = "bolder " + fontSize + "px Verdana";
-	var fontH = fontSize;
-	var fontW = context.measureText(text).width;
-	// build the background
-	context.fillStyle = "rgba(255,255,255,0.3)";
-	var scale = 1.2;
+	context.fillStyle = "rgba(0,0,0,0.2)";
+	let scale = 1.2;
 	context.fillRect(-fontW * scale / 2, -fontH * scale / 1.3, fontW * scale, fontH * scale)
 	// display the text
 	context.fillStyle = "rgba(0,0,0,0.7)";
@@ -46510,186 +46720,189 @@ module.exports = function buildChatBubble(text) {
 
 /***/ }),
 /* 10 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-const THREE = __webpack_require__(0)
-module.exports = function remodel(cape, isSlim = false) {
-    if (this.slim === isSlim)
-        return
-    this.slim = isSlim;
-    const pixRatio = 1 / 32;
-    const charH = 1;
-    const sizes = {
-        headH: 8, helmetH: 9,
-        headW: 8, helmetW: 9,
-        headD: 8, helmetD: 9,
-
-        bodyH: 12, bodyOverH: 13.5,
-        bodyW: 8, bodyOverW: 9,
-        bodyD: 4, bodyOverD: 4.5,
-
-        capeH: 16,
-        capeW: 10,
-        capeD: 1,
-
-        legH: 12, legOverH: 13.5,
-        legW: 4, legOverW: 4.5,
-        legD: 4, legOverD: 4.5,
-
-        armH: 12, armOverH: 13.5,
-        armW: (isSlim ? 3 : 4), armOverW: (isSlim ? 3.375 : 4.5),
-        armD: 4, armOverD: 4.5,
-    };
-    Object.keys(sizes).forEach(k => sizes[k] = sizes[k] * pixRatio)
-    if (!this.root) {
-        this.root = new THREE.Object3D();
-
-        this.headGroup = new THREE.Object3D()
-        this.headGroup.position.y = charH - sizes.headH
-        this.root.add(this.headGroup)
-
-        // build model.head
-        const mesh = new THREE.Mesh(new THREE.CubeGeometry(sizes.headW, sizes.headH, sizes.headD),
-            this.material)
-        mesh.position.y = sizes.headH / 2
-        this.head = mesh
-        this.headGroup.add(this.head)
+module.exports = function buildChatBubble(text) {
+	// create the canvas
+	let canvas = document.createElement("canvas");
+	let context = canvas.getContext("2d");
+	canvas.width = 1024;
+	canvas.height = 512;
+	// center the origin
+	context.translate(canvas.width / 2, canvas.height / 2);
+	// measure text
+	let fontSize = 24;
+	context.font = "bolder " + fontSize + "px Verdana";
+	let fontH = fontSize;
+	let fontW = context.measureText(text).width;
+	// build the background
+	context.fillStyle = "rgba(255,255,255,0.3)";
+	let scale = 1.2;
+	context.fillRect(-fontW * scale / 2, -fontH * scale / 1.3, fontW * scale, fontH * scale)
+	// display the text
+	context.fillStyle = "rgba(0,0,0,0.7)";
+	context.fillText(text, -fontW / 2, 0);
+	// return the canvas element
+	return canvas;
+};
 
 
-        // build model.helmet
-        this.helmet = new THREE.Mesh(new THREE.CubeGeometry(sizes.helmetH, sizes.helmetH, sizes.helmetH),
-            this.materialTran)
-        this.headGroup.add(this.helmet)
-        this.helmet.position.y = sizes.headH / 2
-
-
-        // build model.body
-        this.body = new THREE.Mesh(new THREE.CubeGeometry(sizes.bodyW, sizes.bodyH, sizes.bodyD),
-            this.material)
-        this.root.add(this.body)
-        this.body.position.y = sizes.legH + sizes.bodyH / 2
-
-        // build model.cape
-        if (cape) {
-            this.cape = new THREE.Mesh(new THREE.BoxGeometry(sizes.capeW, sizes.capeH, sizes.capeD),
-                this.capeMaterial)
-            this.root.add(this.cape)
-            this.cape.position.y = sizes.legH + sizes.bodyH / 2
-            this.cape.position.z = -sizes.bodyW / 3 * 2
-            this.cape.rotateX(0.3)
-        }
-
-        // build model.legR
-        this.legR = new THREE.Mesh(new THREE.CubeGeometry(sizes.legW, sizes.legH, sizes.legD)
-            .applyMatrix(new THREE.Matrix4().makeTranslation(0, -sizes.legH / 2, 0)),
-            this.material)
-        this.root.add(this.legR)
-        this.legR.position.x = -sizes.legW / 2
-        this.legR.position.y = sizes.legH
-
-
-        // build model.legL
-        this.legL = new THREE.Mesh(new THREE.CubeGeometry(sizes.legW, sizes.legH, sizes.legD)
-            .applyMatrix(new THREE.Matrix4().makeTranslation(0, -sizes.legH / 2, 0)),
-            this.material)
-        this.root.add(this.legL)
-        this.legL.position.x = sizes.legW / 2
-        this.legL.position.y = sizes.legH
-    }
-    // build model.armR
-    if (this.armR) this.root.remove(this.armR)
-    this.armR = new THREE.Mesh(new THREE.CubeGeometry(sizes.armW, sizes.armH, sizes.armD)
-        .applyMatrix(new THREE.Matrix4().makeTranslation(0, -sizes.armH / 2 + sizes.armW / 2, 0)),
-        this.material)
-    this.root.add(this.armR)
-    this.armR.position.x = -sizes.bodyW / 2 - sizes.armW / 2
-    this.armR.position.y = sizes.legH + sizes.bodyH - sizes.armW / 2
-
-    // build model.armL
-    if (this.armL) this.root.remove(this.armL)
-    this.armL = new THREE.Mesh(new THREE.CubeGeometry(sizes.armW, sizes.armH, sizes.armD)
-        .applyMatrix(new THREE.Matrix4().makeTranslation(0, -sizes.armH / 2 + sizes.armW / 2, 0)),
-        this.material)
-    this.root.add(this.armL)
-    this.armL.position.x = sizes.bodyW / 2 + sizes.armW / 2
-    this.armL.position.y = sizes.legH + sizes.bodyH - sizes.armW / 2
-}
 
 /***/ }),
 /* 11 */
 /***/ (function(module, exports) {
 
-module.exports = function remap() {
-    const texture = this.texture;
-    const offset = texture.image.height - 32;
+function cp(context, sX, sY, w, h, dX, dY, flipHorizontal) {
+    let imgData = context.getImageData(sX, sY, w, h);
+    if (flipHorizontal) {
+        for (let y = 0; y < h; y++) {
+            for (let x = 0; x < (w / 2); x++) {
+                let index = (x + y * w) * 4;
+                let index2 = ((w - x - 1) + y * w) * 4;
+                let pA1 = imgData.data[index];
+                let pA2 = imgData.data[index + 1];
+                let pA3 = imgData.data[index + 2];
+                let pA4 = imgData.data[index + 3];
 
-    let geometry
-    geometry = this.head.geometry;
-    this.mapUv(geometry, 0, 16, 24 + offset, 24, 16 + offset)	// left
-    this.mapUv(geometry, 1, 0, 24 + offset, 8, 16 + offset)	// right
-    this.mapUv(geometry, 2, 8, 32 + offset, 16, 24 + offset)	// top
-    this.mapUv(geometry, 3, 16, 32 + offset, 24, 24 + offset)	// bottom
-    this.mapUv(geometry, 4, 8, 24 + offset, 16, 16 + offset)	// front
-    this.mapUv(geometry, 5, 24, 24 + offset, 32, 16 + offset)	// back
+                let pB1 = imgData.data[index2];
+                let pB2 = imgData.data[index2 + 1];
+                let pB3 = imgData.data[index2 + 2];
+                let pB4 = imgData.data[index2 + 3];
 
-    geometry = this.helmet.geometry
-    this.mapUv(geometry, 0, 48, 24 + offset, 56, 16 + offset)	// left
-    this.mapUv(geometry, 1, 32, 24 + offset, 40, 16 + offset)	// right
-    this.mapUv(geometry, 2, 40, 32 + offset, 48, 24 + offset)	// top
-    this.mapUv(geometry, 3, 48, 32 + offset, 56, 24 + offset)	// bottom
-    this.mapUv(geometry, 4, 40, 24 + offset, 48, 16 + offset)	// front
-    this.mapUv(geometry, 5, 56, 24 + offset, 64, 16 + offset)	// back
+                imgData.data[index] = pB1;
+                imgData.data[index + 1] = pB2;
+                imgData.data[index + 2] = pB3;
+                imgData.data[index + 3] = pB4;
 
-    geometry = this.body.geometry
-    this.mapUv(geometry, 0, 28, 12 + offset, 32, 0 + offset)	// left
-    this.mapUv(geometry, 1, 16, 12 + offset, 20, 0 + offset)	// right
-    this.mapUv(geometry, 2, 20, 16 + offset, 28, 12 + offset)	// top
-    this.mapUv(geometry, 3, 28, 16 + offset, 32, 12 + offset)	// bottom
-    this.mapUv(geometry, 4, 20, 12 + offset, 28, 0 + offset)	// front
-    this.mapUv(geometry, 5, 32, 12 + offset, 40, 0 + offset)	// back
-
-    if (this.cape) {
-        geometry = this.cape.geometry
-        console.log(geometry)
-        this.mapUv(geometry, 0, 0, 16 + offset, 1, 0 + offset, 22, 17)	// left
-        this.mapUv(geometry, 1, 10, 16 + offset, 11, 0 + offset, 22, 17)	// right
-        this.mapUv(geometry, 2, 11, 17 + offset, 21, 16 + offset, 22, 17)	// top
-        this.mapUv(geometry, 3, 1, 17 + offset, 11, 16 + offset, 22, 17)	// bottom
-        this.mapUv(geometry, 4, 12, 16 + offset, 22, 0 + offset, 22, 17)	// front
-        this.mapUv(geometry, 5, 1, 16 + offset, 11, 0 + offset, 22, 17)	// back
+                imgData.data[index2] = pA1;
+                imgData.data[index2 + 1] = pA2;
+                imgData.data[index2 + 2] = pA3;
+                imgData.data[index2 + 3] = pA4;
+            }
+        }
     }
+    context.putImageData(imgData, dX, dY);
+};
 
-    geometry = this.armR.geometry;
-    this.mapUv(geometry, 0, 48, 12 + offset, 52, 0 + offset)	// right
-    this.mapUv(geometry, 1, 40, 12 + offset, 44, 0 + offset)	// left
-    this.mapUv(geometry, 2, 44, 16 + offset, 48, 12 + offset)	// top
-    this.mapUv(geometry, 3, 48, 16 + offset, 52, 12 + offset)	// bottom
-    this.mapUv(geometry, 4, 44, 12 + offset, 48, 0 + offset)	// front
-    this.mapUv(geometry, 5, 52, 12 + offset, 56, 0 + offset)	// back
+module.exports = (context, width) => {
+    let scale = width / 64.0;
+    let copySkin = (context, sX, sY, w, h, dX, dY, flipHorizontal) => cp(context, sX * scale, sY * scale, w * scale, h * scale, dX * scale, dY * scale, flipHorizontal);
+    copySkin(context, 4, 16, 4, 4, 20, 48, true); // Top Leg
+    copySkin(context, 8, 16, 4, 4, 24, 48, true); // Bottom Leg
+    copySkin(context, 0, 20, 4, 12, 24, 52, true); // Outer Leg
+    copySkin(context, 4, 20, 4, 12, 20, 52, true); // Front Leg
+    copySkin(context, 8, 20, 4, 12, 16, 52, true); // Inner Leg
+    copySkin(context, 12, 20, 4, 12, 28, 52, true); // Back Leg
+    copySkin(context, 44, 16, 4, 4, 36, 48, true); // Top Arm
+    copySkin(context, 48, 16, 4, 4, 40, 48, true); // Bottom Arm
+    copySkin(context, 40, 20, 4, 12, 40, 52, true); // Outer Arm
+    copySkin(context, 44, 20, 4, 12, 36, 52, true); // Front Arm
+    copySkin(context, 48, 20, 4, 12, 32, 52, true); // Inner Arm
+    copySkin(context, 52, 20, 4, 12, 44, 52, true); // Back Arm
+}
 
-    geometry = this.armL.geometry;
-    this.mapUv(geometry, 0, 44 + offset, 12, 40, 0 + offset)	// right
-    this.mapUv(geometry, 1, 52 + offset, 12, 48, 0 + offset)	// left
-    this.mapUv(geometry, 2, 44 + offset, 16, 48, 12 + offset)	// top
-    this.mapUv(geometry, 3, 48 + offset, 16, 52, 12 + offset)	// bottom
-    this.mapUv(geometry, 4, 48 + offset, 12, 44, 0 + offset)	// front
-    this.mapUv(geometry, 5, 56 + offset, 12, 52, 0 + offset)	// back
 
-    geometry = this.legR.geometry;
-    this.mapUv(geometry, 0, 8 + offset, 12, 12, 0 + offset)	// right
-    this.mapUv(geometry, 1, 0 + offset, 12, 4, 0 + offset)	// left
-    this.mapUv(geometry, 2, 4 + offset, 16, 8, 12 + offset)	// top
-    this.mapUv(geometry, 3, 8 + offset, 16, 12, 12 + offset)	// bottom
-    this.mapUv(geometry, 4, 4 + offset, 12, 8, 0 + offset)	// front
-    this.mapUv(geometry, 5, 12 + offset, 12, 16, 0 + offset)	// back
+/***/ }),
+/* 12 */
+/***/ (function(module, exports, __webpack_require__) {
 
-    geometry = this.legL.geometry;
-    this.mapUv(geometry, 0, 4, 12 + offset, 0, 0 + offset)	// left
-    this.mapUv(geometry, 1, 12, 12 + offset, 8, 0 + offset)	// right
-    this.mapUv(geometry, 2, 8, 16 + offset, 4, 12 + offset)	// top
-    this.mapUv(geometry, 3, 12, 16 + offset, 8, 12 + offset)	// bottom
-    this.mapUv(geometry, 4, 8, 12 + offset, 4, 0 + offset)	// front
-    this.mapUv(geometry, 5, 16, 12 + offset, 12, 0 + offset)	// back
+const THREE = __webpack_require__(0)
+const format = __webpack_require__(1)
+module.exports = function remodel() {
+    if (!this.root) {
+        this.root = new THREE.Object3D();
+        const template = this.slim ? format.alex : format.steve;
+        const partsNames = Object.keys(template);
+        for (const pname of partsNames) {
+            const model = template[pname];
+            const skinMesh = new THREE.Mesh(new THREE.CubeGeometry(model.w,
+                model.h, model.d),
+                pname === 'cape' ? this.capeMaterial : this.material)
+            skinMesh.name = pname
+            const box = new THREE.BoxHelper(skinMesh, 0xffffff)
+            box.name = `${pname}Box`;
+            this[box.name] = box;
+            box.visible = false;
+            skinMesh.add(box);
+            this[skinMesh.name] = skinMesh;
+            this.root.add(skinMesh);
+            if (model.y) skinMesh.position.y = model.y;
+            if (model.x) skinMesh.position.x = model.x;
+            if (model.z) skinMesh.position.z = model.z;
+
+            if (pname === 'cape') {
+                skinMesh.rotation.x = 25 * (Math.PI / 180);
+            }
+            const layer = model.layer;
+            if (layer) {
+                const layerMesh = new THREE.Mesh(new THREE.CubeGeometry(layer.w,
+                    layer.h, layer.d),
+                    this.materialTran)
+                layerMesh.name = `${pname}Layer`
+                this[layerMesh.name] = layerMesh;
+                skinMesh.add(layerMesh);
+                if (layer.y) layerMesh.position.y = layer.y;
+                if (layer.x) layerMesh.position.x = layer.x;
+                if (layer.z) layerMesh.position.z = layer.z;
+            }
+        }
+    } else {
+        const template = this.slim ? format.alex : format.steve;
+        for (const key of ['rightArm', 'leftArm']) {
+            let model = template[key];
+            this[key].geometry = new THREE.CubeGeometry(model.w, model.h, model.d);
+            model = model.layer;
+            this[`${key}Layer`].geometry = new THREE.CubeGeometry(model.w, model.h, model.d);;
+        }
+    }
+}
+
+/***/ }),
+/* 13 */
+/***/ (function(module, exports, __webpack_require__) {
+
+const format = __webpack_require__(1)
+
+module.exports = function remap(type) {
+    const legacy = this.texture.image.height !== this.texture.image.width;
+    const model = this.slim ? format.alex : format.steve;
+    const mapUv = (mesh, faceIdx, x1, y1, x2, y2) => {
+        const geometry = mesh.geometry;
+        const texture = mesh.material.map;
+        const tileUvW = 1 / texture.image.width;
+        const tileUvH = 1 / texture.image.height;
+        let UVs = geometry.faceVertexUvs[0][faceIdx * 2];
+        x1 *= tileUvW;
+        x2 *= tileUvW;
+        y1 = 1 - (y1 * tileUvH);
+        y2 = 1 - (y2 * tileUvH);
+        UVs[0].x = x1; UVs[0].y = y1;
+        UVs[1].x = x1; UVs[1].y = y2;
+        UVs[2].x = x2; UVs[2].y = y1;
+        UVs = geometry.faceVertexUvs[0][faceIdx * 2 + 1];
+        UVs[0].x = x1; UVs[0].y = y2;
+        UVs[1].x = x2; UVs[1].y = y2;
+        UVs[2].x = x2; UVs[2].y = y1;
+    }
+    const order = ['left', 'right', 'top', 'bottom', 'front', 'back']
+    const map = (mesh, src) => {
+        for (let i = 0; i < order.length; i++) {
+            const posArr = src[order[i]];
+            mapUv(mesh, i, posArr[0], posArr[1], posArr[2], posArr[3]);
+        }
+    }
+    if (type === 'cape') {
+        if (this[type])
+            map(this[type], model[type])
+    } else for (const key of Object.keys(model).filter(k => k !== 'cape')) {
+        if (this[key])
+            // if (legacy && (key === 'leftArm' || key === 'leftLeg'))
+                // map(this[key], model[key.replace('left', 'right')])
+            // else
+                map(this[key], model[key]);
+        if (!legacy && this[`${key}Layer`])
+            map(this[`${key}Layer`], model[key].layer);
+    }
 }
 
 /***/ })
