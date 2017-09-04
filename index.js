@@ -59,6 +59,7 @@ class PlayerModel {
 			map: this.capeTexture
 		})
 		capeMaterial.name = 'capeMaterial'
+		capeMaterial.visible = false;
 		this.capeMaterial = capeMaterial;
 
 		if (!skin) skin = defaultSkin;
@@ -67,7 +68,7 @@ class PlayerModel {
 	}
 
 	updateSkin(skin, isSlim) {
-		isSlim = isSlim || false
+		if (isSlim !== true) isSlim = false
 		const texture = this.texture
 		const needUpdate = this.slim == undefined || this.slim == null || this.slim !== isSlim;
 		this.slim = isSlim;
@@ -102,6 +103,11 @@ class PlayerModel {
 		return this
 	}
 	updateCape(cape) {
+		if (cape === undefined) {
+			this.capeMaterial.visible = false;
+			return;
+		}
+		this.capeMaterial.visible = true;
 		const texture = this.capeTexture;
 		const reload = (img) => {
 			texture.image = img
