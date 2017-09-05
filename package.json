@@ -1,10 +1,11 @@
 {
   "name": "threex.minecraft",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "node ./node_modules/webpack/bin/webpack.js ./test/index.js ./test/bundle.js"
+    "build.test": "node ./node_modules/webpack/bin/webpack.js ./test/index.js ./test/bundle.js",
+    "build": "node ./node_modules/webpack/bin/webpack.js ./index.js ./dist/index.js"
   },
   "repository": {
     "type": "git",

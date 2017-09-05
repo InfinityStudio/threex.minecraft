@@ -38,7 +38,6 @@ class PlayerModel {
 		this.remodel = remodel;
 
 		const texture = new THREE.Texture(document.createElement('canvas'));
-		console.log(texture.image)
 		texture.magFilter = THREE.NearestFilter;
 		texture.minFilter = THREE.NearestFilter;
 		this.texture = texture;
@@ -60,10 +59,11 @@ class PlayerModel {
 		})
 		capeMaterial.name = 'capeMaterial'
 		this.capeMaterial = capeMaterial;
+		capeMaterial.visible = false;
 
 		if (!skin) skin = defaultSkin;
 		this.updateSkin(skin, isSlim)
-		if (cape) this.updateCape(cape);
+		this.updateCape(cape);
 	}
 
 	updateSkin(skin, isSlim) {
@@ -102,6 +102,11 @@ class PlayerModel {
 		return this
 	}
 	updateCape(cape) {
+		if (cape === undefined) {
+			this.capeMaterial.visible = false;
+			return;
+		}
+		this.capeMaterial.visible = true;
 		const texture = this.capeTexture;
 		const reload = (img) => {
 			texture.image = img
