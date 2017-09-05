@@ -58,6 +58,7 @@ class PlayerModel {
 			map: this.capeTexture
 		})
 		capeMaterial.name = 'capeMaterial'
+		capeMaterial.visible = false;
 		this.capeMaterial = capeMaterial;
 		capeMaterial.visible = false;
 
@@ -67,11 +68,11 @@ class PlayerModel {
 	}
 
 	updateSkin(skin, isSlim) {
-		isSlim = isSlim || false
+		if (isSlim !== true) isSlim = false
 		const texture = this.texture
-		const slimChange = this.slim !== isSlim;
+		const needUpdate = this.slim == undefined || this.slim == null || this.slim !== isSlim;
 		this.slim = isSlim;
-		if (slimChange) this.remodel()
+		if (needUpdate) this.remodel()
 		const reload = (img) => {
 			let legacy = img.width !== img.height;
 			const canvas = texture.image;
@@ -85,7 +86,7 @@ class PlayerModel {
 			} else {
 				context.drawImage(img, 0, 0, img.width, img.width);
 			}
-			if (slimChange) this.remap()
+			if (needUpdate) this.remap()
 			texture.needsUpdate = true;
 		}
 		if (skin instanceof Image) {
